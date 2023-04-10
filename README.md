@@ -12,6 +12,11 @@ The application contains 2 spring boot services. Config server and Trading app s
 
 Also the project can be run seperately using Eclipse or Intellij. When running from local machine using Eclipse or Intellij , please update the config server url accordinlgy in the properties file of the trading application. Sample values when running in docker and local machine is already available in the propertoes file.
 
+Once the application is run locally services can be accessed below url
+
+TradingApp services url  eg : http://localhost:8080/tradingApp/signal/2
+Swagger url   :  http://localhost:8080/swagger-ui/index.html 
+Spring Security is implemented : Username: tradingApp  ,  Password : 111444
 
 ## System requirements
 
