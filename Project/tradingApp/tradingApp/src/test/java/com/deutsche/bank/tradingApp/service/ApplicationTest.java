@@ -3,7 +3,6 @@ package com.deutsche.bank.tradingApp.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +25,6 @@ public class ApplicationTest {
 
 	@Mock
 	private Algo algo;
-	
 
 	Map<Integer, List<String>> signalList;
 
@@ -34,42 +32,56 @@ public class ApplicationTest {
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
 		signalList = new HashMap<>();
-		buildSignalList(1,"setUp","setAlgoParam,1,60","performCalc","submitToMarket");
-		buildSignalList(2,"reverse","setAlgoParam,1,80","submitToMarket");
-		buildSignalList(3,"setAlgoParam,1,90","setAlgoParam,2,15","performCalc","submitToMarket");
-		buildSignalList(4,"revers");
+		buildSignalList(1, "setUp", "setAlgoParam,1,60", "performCalc", "submitToMarket");
+		buildSignalList(2, "reverse", "setAlgoParam,1,80", "submitToMarket");
+		buildSignalList(3, "setAlgoParam,1,90", "setAlgoParam,2,15", "performCalc", "submitToMarket");
+		buildSignalList(4, "revers");
 		application.signalList = signalList;
 	}
-	private void buildSignalList(int signal,String... methods) {
+
+	private void buildSignalList(int signal, String... methods) {
 		List<String> list = new ArrayList<>();
 		for (String method : methods) {
 			list.add(method);
 		}
 		signalList.put(signal, list);
-	
+
 	}
+
+	/**
+	 * Test handleSignal() for the signal which is not configured in
+	 * trading-application.properties;
+	 */
 	@Test
 	public void handleSignalnotConfiguredTest() {
 		application.handleSignal(9);
 		verify(algo).cancelTrades();
 		verify(algo).doAlgo();
 	}
-	
+
+	/**
+	 * Test handleSignal() for the signal which is configured in
+	 * trading-application.properties;
+	 */
 	@Test
 	public void handleSignalConfiguredTest() {
 		application.handleSignal(2);
 		verify(algo).reverse();
-		verify(algo).setAlgoParam(1,80);
+		verify(algo).setAlgoParam(1, 80);
 		verify(algo).submitToMarket();
 		verify(algo).doAlgo();
 	}
-	
+
+	/**
+	 * Test handleSignal() for the signal which is configured in
+	 * trading-application.properties but configured the method which is not exist
+	 * in Algo.class;
+	 */
 	@Test
 	public void testHandleSignalWithConfiguredSignalAndMethodNotFound() throws Exception {
 
-		ConfiguredMethodNotAvailable exception = assertThrows(
-				ConfiguredMethodNotAvailable.class, () -> application.handleSignal(4));
-		assertEquals(
-				"For given signal  4 the functionality revers not configured correctly", exception.getMessage());
+		ConfiguredMethodNotAvailable exception = assertThrows(ConfiguredMethodNotAvailable.class,
+				() -> application.handleSignal(4));
+		assertEquals("For given signal  4 the functionality revers not configured correctly", exception.getMessage());
 	}
 }
