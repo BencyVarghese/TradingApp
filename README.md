@@ -2,7 +2,7 @@
 
 ## Configuration
 
-Spring boot config server is used to manage the configuration. Confiiguration is kept in the below repository.
+For each signal the corresponding methods can be configured the properties file. Spring boot config server is used to manage the configuration. Confiiguration is kept in the below repository.
 
 [TradingAppConfig](https://github.com/BencyVarghese/TradingAppConfig)
 
