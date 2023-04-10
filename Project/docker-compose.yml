@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  tradingapp:
+    image: tradingapp
+    build:
+      context: .
+      dockerfile: tradingApp/Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - tradingappconfigserver
+    networks:
+      tradingnetwork:
+    restart: on-failure
+
+  tradingappconfigserver:
+    image: tradingappconfigserver
+    build:
+      context: .
+      dockerfile: tradingAppConfigServer/Dockerfile
+    ports:
+      - 8888:8888
+    networks:
+      tradingnetwork:
+
+networks:
+  tradingnetwork:
