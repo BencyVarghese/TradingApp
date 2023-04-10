@@ -15,7 +15,9 @@ Also the project can be run seperately using Eclipse or Intellij. When running f
 Once the application is run locally services can be accessed below url
 
 TradingApp services url  eg : http://localhost:8080/tradingApp/signal/2
+
 Swagger url   :  http://localhost:8080/swagger-ui/index.html 
+
 Spring Security is implemented : Username: tradingApp  ,  Password : 111444
 
 ## System requirements
