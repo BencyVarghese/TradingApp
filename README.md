@@ -15,10 +15,10 @@ Also the project can be run seperately using Eclipse or Intellij. When running f
 
 ## System requirements
 
-JDK 17
-Docker
-Eclipse or Intellij
-Maven
+JDK 17 ,
+Docker ,
+Eclipse or Intellij ,
+Maven ,
 
 ## Unit tests
 
