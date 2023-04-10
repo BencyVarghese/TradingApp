@@ -17,7 +17,7 @@ public class TradingAppController {
 	public SignalHandler signalHandler;
 
 	@PostMapping("/signal/{signal}")
-	public String callSingnal(@PathVariable int signal) {
+	public String executeSignal(@PathVariable int signal) {
 		signalHandler.handleSignal(signal);
 		return "signal is processed successfully ";
 	}

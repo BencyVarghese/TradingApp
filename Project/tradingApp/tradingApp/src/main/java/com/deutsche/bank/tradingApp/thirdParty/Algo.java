@@ -1,6 +1,9 @@
 package com.deutsche.bank.tradingApp.thirdParty;
 
 import org.springframework.stereotype.Component;
+/**
+ * This is implemented in a third-party library and we cannot change it
+ */
 
 @Component
 public class Algo {

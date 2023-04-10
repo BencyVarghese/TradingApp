@@ -1,7 +1,9 @@
 package com.deutsche.bank.tradingApp.exception;
 
 import java.time.LocalDateTime;
-
+/**
+ * Customized Error details 
+ */
 public class ErrorDetails {
 	private LocalDateTime timestamp;
 	private String error ;

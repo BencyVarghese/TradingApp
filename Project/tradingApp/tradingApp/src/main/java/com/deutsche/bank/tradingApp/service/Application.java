@@ -21,10 +21,15 @@ public class Application implements SignalHandler {
 
 	@Autowired
 	private Algo algo;
-
+	/**
+	 * Fetch the SignalMap from Spring Boot Config server
+	 */
 	@Value("#{${trading-application.map.of.list}}")
 	public Map<Integer, List<String>> signalList;
 
+	/**
+	 * For given signal the configured methods of Algo will called 
+	 */
 	@Override
 	public void handleSignal(int signal) {
 
