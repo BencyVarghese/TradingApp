@@ -5,6 +5,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import com.deutsche.bank.tradingApp.thirdParty.Algo;
 
 @Service
 public class TradeAppService {
+	
+	Logger logger = LoggerFactory.getLogger(TradeAppService.class);
 	
 	@Autowired
 	private Algo algo;
@@ -31,6 +35,7 @@ public class TradeAppService {
 			algo.cancelTrades();
 			algo.doAlgo();
 			};
+			logger.info("Given signal "+ signal + " not yet configured hence excuting default method");
 			return worker;
 		}
 		worker = () -> {
@@ -44,6 +49,7 @@ public class TradeAppService {
 						method.invoke(algo);
 					} catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException
 							| InvocationTargetException e) {
+						logger.error("Error in Method Configured", e);
 						throw new ConfiguredMethodNotAvailable("For given signal  " + signal + " the functionality " + methodName +" not configured correctly" );
 						
 					}
